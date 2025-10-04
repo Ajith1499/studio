@@ -1,3 +1,142 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-1",
+      "description": "Stylish woman in a vibrant city street",
+      "imageUrl": "https://images.unsplash.com/photo-1627292441194-0280c19e74e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZmFzaGlvbiUyMG1vZGVsfGVufDB8fHx8MTc1OTU4ODU4Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "fashion model"
+    },
+    {
+      "id": "avatar-1",
+      "description": "User profile avatar",
+      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTk1MDY2MzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "product-1",
+      "description": "Modern blue denim jacket",
+      "imageUrl": "https://images.unsplash.com/photo-1543076447-215ad9ba6923?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkZW5pbSUyMGphY2tldHxlbnwwfHx8fDE3NTk0NzA5MDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "denim jacket"
+    },
+    {
+      "id": "product-2",
+      "description": "Elegant summer floral dress",
+      "imageUrl": "https://images.unsplash.com/photo-1532675432006-329c6fed7045?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzdW1tZXIlMjBkcmVzc3xlbnwwfHx8fDE3NTk0ODc5MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "summer dress"
+    },
+    {
+      "id": "product-3",
+      "description": "Classic white leather sneakers",
+      "imageUrl": "https://images.unsplash.com/photo-1615109255391-b0dfdcd5b8d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx3aGl0ZSUyMHNuZWFrZXJzfGVufDB8fHx8MTc1OTU2MDk1OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "white sneakers"
+    },
+    {
+      "id": "product-4",
+      "description": "Men's tailored gray suit",
+      "imageUrl": "https://images.unsplash.com/photo-1546572797-e8c933a75a1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtYW4lMjBzdWl0fGVufDB8fHx8MTc1OTUxMjAzMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "man suit"
+    },
+    {
+      "id": "product-5",
+      "description": "Cozy knitted wool sweater",
+      "imageUrl": "https://images.unsplash.com/photo-1601379327928-bedfaf9da2d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx3b29sJTIwc3dlYXRlcnxlbnwwfHx8fDE3NTk1ODEyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "wool sweater"
+    },
+    {
+      "id": "product-6",
+      "description": "Striped cotton t-shirt",
+      "imageUrl": "https://images.unsplash.com/photo-1651761179569-4ba2aa054997?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjb3R0b24lMjB0LXNoaXJ0fGVufDB8fHx8MTc1OTUxNzE0OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cotton t-shirt"
+    },
+    {
+      "id": "product-7",
+      "description": "Black skinny jeans",
+      "imageUrl": "https://images.unsplash.com/photo-1516271099866-de31ba93ee4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMGplYW5zfGVufDB8fHx8MTc1OTUxNjc4OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "black jeans"
+    },
+    {
+      "id": "product-8",
+      "description": "Red silk evening gown",
+      "imageUrl": "https://images.unsplash.com/photo-1548454433-4a1812514573?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxldmVuaW5nJTIwZ293bnxlbnwwfHx8fDE3NTk1MjUwNjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "evening gown"
+    },
+    {
+      "id": "product-9",
+      "description": "Women's trench coat",
+      "imageUrl": "https://images.unsplash.com/photo-1617391258031-f8d80b22fb35?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx0cmVuY2glMjBjb2F0fGVufDB8fHx8MTc1OTU0MjM5M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "trench coat"
+    },
+    {
+      "id": "product-10",
+      "description": "Men's casual chinos",
+      "imageUrl": "https://images.unsplash.com/photo-1758796305217-d987b122b44b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtZW4lMjBjaGlub3N8ZW58MHx8fHwxNzU5NTg4NTg2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "men chinos"
+    },
+    {
+      "id": "product-11",
+      "description": "Leather handbag",
+      "imageUrl": "https://images.unsplash.com/photo-1575295912464-fcfd1186d11d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxsZWF0aGVyJTIwaGFuZGJhZ3xlbnwwfHx8fDE3NTk0OTc1ODB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "leather handbag"
+    },
+    {
+      "id": "product-12",
+      "description": "Sports leggings",
+      "imageUrl": "https://images.unsplash.com/photo-1740628971652-4cd79b9b4301?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzcG9ydHMlMjBsZWdnaW5nc3xlbnwwfHx8fDE3NTk1ODg1ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sports leggings"
+    },
+    {
+      "id": "product-13",
+      "description": "Kid's colorful raincoat",
+      "imageUrl": "https://images.unsplash.com/photo-1623604407441-c024bd992e63?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxraWQlMjByYWluY29hdHxlbnwwfHx8fDE3NTk1ODg1ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kid raincoat"
+    },
+    {
+      "id": "product-14",
+      "description": "Baby onesie with animal print",
+      "imageUrl": "https://images.unsplash.com/photo-1584689486646-3281b9440966?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxiYWJ5JTIwb25lc2llfGVufDB8fHx8MTc1OTU4ODU4Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "baby onesie"
+    },
+    {
+      "id": "product-15",
+      "description": "Men's leather boots",
+      "imageUrl": "https://images.unsplash.com/photo-1605812860427-4024433a70fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsZWF0aGVyJTIwYm9vdHN8ZW58MHx8fHwxNzU5NTU4MzI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "leather boots"
+    },
+    {
+      "id": "product-16",
+      "description": "Women's high heels",
+      "imageUrl": "https://images.unsplash.com/photo-1596892003083-4280deaf4275?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxoaWdoJTIwaGVlbHN8ZW58MHx8fHwxNzU5NTY0MzA3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "high heels"
+    },
+    {
+      "id": "shop-1",
+      "description": "Modern boutique storefront",
+      "imageUrl": "https://images.unsplash.com/photo-1664157558292-8670224b75dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxib3V0aXF1ZSUyMHN0b3JlZnJvbnR8ZW58MHx8fHwxNzU5NTg4NTg2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "boutique storefront"
+    },
+    {
+      "id": "shop-2",
+      "description": "Chic clothing store interior",
+      "imageUrl": "https://images.unsplash.com/photo-1625698311031-f0dd15be5144?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjbG90aGluZyUyMHN0b3JlfGVufDB8fHx8MTc1OTUxODE5NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "clothing store"
+    },
+    {
+      "id": "shop-3",
+      "description": "Luxury fashion outlet",
+      "imageUrl": "https://images.unsplash.com/photo-1567967455389-e432b1ca1404?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxmYXNoaW9uJTIwb3V0bGV0fGVufDB8fHx8MTc1OTU4ODU4Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "fashion outlet"
+    },
+    {
+      "id": "shop-4",
+      "description": "Vintage thrift shop exterior",
+      "imageUrl": "https://images.unsplash.com/photo-1582116850476-002a84f235d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0aHJpZnQlMjBzaG9wfGVufDB8fHx8MTc1OTU4ODU4Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "thrift shop"
+    },
+    {
+      "id": "shop-5",
+      "description": "Kids clothing store display",
+      "imageUrl": "https://images.unsplash.com/photo-1632232963035-bc14755747c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxraWRzJTIwY2xvdGhpbmd8ZW58MHx8fHwxNzU5NTg4NTg2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kids clothing"
+    }
+  ]
 }
