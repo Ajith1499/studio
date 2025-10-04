@@ -119,7 +119,7 @@ export default function RecommendationsSection() {
                           <FormControl>
                             <SelectTrigger>
                               <SelectValue placeholder="Select age" />
-                            </Trigger>
+                            </SelectTrigger>
                           </FormControl>
                           <SelectContent>
                             <SelectItem value="18-24">18-24</SelectItem>
