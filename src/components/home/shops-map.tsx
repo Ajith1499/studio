@@ -65,20 +65,6 @@ export default function ShopsMap({ shops }: ShopsMapProps) {
           )}
         </div>
       </div>
-       <div className="mt-4 p-4 bg-secondary rounded-lg text-sm text-secondary-foreground">
-          <p>
-            <strong>Note:</strong> To make the map fully functional, you need to add your Google Maps API key.
-            Create a <code>.env.local</code> file in the root of your project and add the following line:
-          </p>
-          <pre className="mt-2 p-2 bg-muted rounded-md font-code"><code>NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=YOUR_API_KEY_HERE</code></pre>
-          <p className="mt-2">
-            You can get an API key from the {' '}
-            <a href="https://console.cloud.google.com/google/maps-apis" target="_blank" rel="noopener noreferrer" className="text-primary underline">
-              Google Cloud Console
-            </a>
-            .
-          </p>
-        </div>
     </section>
   );
 }
