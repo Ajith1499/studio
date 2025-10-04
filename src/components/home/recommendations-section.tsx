@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { generateRecommendationsAction } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Loader2, Wand2 } from 'lucide-react';
@@ -16,7 +16,7 @@ const recommendationSchema = z.object({
   gender: z.string().min(1, 'Please select a gender.'),
   location: z.string().min(1, 'Please enter a location.'),
   ageRange: z.string().min(1, 'Please select an age range.'),
-  browsingHistory: z.string().optional(),
+  browsingHistory: z.string().optional()
 });
 
 type RecommendationFormValues = z.infer<typeof recommendationSchema>;
@@ -119,7 +119,7 @@ export default function RecommendationsSection() {
                           <FormControl>
                             <SelectTrigger>
                               <SelectValue placeholder="Select age" />
-                            </SelectTrigger>
+                            </Trigger>
                           </FormControl>
                           <SelectContent>
                             <SelectItem value="18-24">18-24</SelectItem>

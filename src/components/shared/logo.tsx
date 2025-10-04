@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { SewingPin } from 'lucide-react';
+import { Scissors } from 'lucide-react';
 
 export default function Logo({ className }: { className?: string }) {
   return (
@@ -10,7 +10,7 @@ export default function Logo({ className }: { className?: string }) {
       )}
     >
       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-        <SewingPin className="h-5 w-5" />
+        <Scissors className="h-5 w-5" />
       </div>
       <span className="font-headline text-lg font-bold group-data-[collapsible=icon]:hidden">
         NearThreads
