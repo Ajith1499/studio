@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { getShops } from '@/lib/data';
 
 export default function HeroSection() {
   const heroImage = PlaceHolderImages.find((img) => img.id === 'hero-1');
@@ -15,8 +16,16 @@ export default function HeroSection() {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/shops/${searchQuery.trim()}`);
+    const query = searchQuery.trim().toLowerCase();
+    if (query) {
+      const shops = getShops();
+      const shop = shops.find(s => s.name.toLowerCase() === query);
+      if (shop) {
+        router.push(`/shops/${shop.id}`);
+      } else {
+        // Optional: Add a toast notification here to inform the user that the shop was not found.
+        alert(`Shop "${searchQuery}" not found.`);
+      }
     }
   };
 
@@ -46,7 +55,7 @@ export default function HeroSection() {
         >
           <Input
             type="search"
-            placeholder="Enter a Shop ID (e.g., shop-1)..."
+            placeholder="Enter a shop name (e.g., Vogue Venture)..."
             className="flex-grow rounded-full border-0 bg-transparent text-white placeholder:text-white/80 focus-visible:ring-0 focus-visible:ring-offset-0"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
