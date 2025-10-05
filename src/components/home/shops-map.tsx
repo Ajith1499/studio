@@ -13,22 +13,17 @@ export default function ShopsMap({ shops }: ShopsMapProps) {
   const [selectedShop, setSelectedShop] = useState<Shop | null>(null);
   
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-  const getMapUrl = () => {
-    if (selectedShop) {
-      return `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${selectedShop.latitude},${selectedShop.longitude}`;
-    }
-    const centerPoint = shops.reduce(
-      (acc, shop) => {
-        acc.lat += shop.latitude;
-        acc.lng += shop.longitude;
-        return acc;
-      },
-      { lat: 0, lng: 0 }
-    );
-    const avgLat = centerPoint.lat / shops.length;
-    const avgLng = centerPoint.lng / shops.length;
-    return `https://www.google.com/maps/embed/v1/view?key=${apiKey}&center=${avgLat},${avgLng}&zoom=12`;
-  };
+
+  const centerPoint = shops.reduce(
+    (acc, shop) => {
+      acc.lat += shop.latitude;
+      acc.lng += shop.longitude;
+      return acc;
+    },
+    { lat: 0, lng: 0 }
+  );
+  const avgLat = centerPoint.lat / shops.length;
+  const avgLng = centerPoint.lng / shops.length;
 
   return (
     <section>
@@ -47,7 +42,10 @@ export default function ShopsMap({ shops }: ShopsMapProps) {
               style={{ border: 0 }}
               loading="lazy"
               allowFullScreen
-              src={getMapUrl()}
+              src={selectedShop 
+                ? `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${selectedShop.latitude},${selectedShop.longitude}`
+                : `https://www.google.com/maps/embed/v1/view?key=${apiKey}&center=${avgLat},${avgLng}&zoom=12`
+              }
             ></iframe>
           {selectedShop && (
             <div className="absolute bottom-4 left-4 right-4 bg-background p-4 rounded-lg shadow-2xl max-w-sm">
