@@ -62,7 +62,7 @@ const products: Product[] = [
 ];
 
 const shops: Shop[] = [
-  { id: 'shop-1', name: 'Vogue Venture', location: 'Downtown, Springfield', phone: '+1-202-555-0182', latitude: 39.7817, longitude: -89.6501, ...getImage('shop-1') },
+  { id: 'shop-1', name: 'Vogue Venture', location: 'Downtown, Springfield', phone: '+1-202-555-0182', latitude: 10.700801259055474, longitude: 76.7552164288286, ...getImage('shop-1') },
   { id: 'shop-2', name: 'Gentleman\'s Quarters', location: 'Uptown, Metropolis', phone: '+1-202-555-0134', latitude: 39.8028, longitude: -89.6436, ...getImage('shop-2') },
   { id: 'shop-3', name: 'Chic Boutique', location: 'SoHo, New York', phone: '+1-202-555-0177', latitude: 40.7233, longitude: -74.0030, ...getImage('shop-3') },
   { id: 'shop-4', name: 'Retro Threads', location: 'Arts District, Los Angeles', phone: '+1-202-555-0191', latitude: 34.0435, longitude: -118.2325, ...getImage('shop-4') },
