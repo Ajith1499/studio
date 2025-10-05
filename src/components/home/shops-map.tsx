@@ -58,9 +58,12 @@ export default function ShopsMap({ shops }: ShopsMapProps) {
               src={getMapUrl()}
             ></iframe>
           ) : (
-            <div className="text-center text-muted-foreground p-8">
+             <div className="text-center text-muted-foreground p-8">
               <p className="font-semibold">Google Maps API Key is missing.</p>
-              <p className="text-sm mt-2">Please add your key to the <code>.env.local</code> file to enable the map view.</p>
+              <p className="text-sm mt-2">
+                To enable the map, please add your key to the{' '}
+                <code>.env.local</code> file and restart the server.
+              </p>
             </div>
           )}
           {selectedShop && apiKey && apiKey !== 'YOUR_API_KEY_HERE' && (
