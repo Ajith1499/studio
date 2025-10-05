@@ -1,11 +1,24 @@
+'use client';
+
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function HeroSection() {
   const heroImage = PlaceHolderImages.find((img) => img.id === 'hero-1');
+  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/shops/${searchQuery.trim()}`);
+    }
+  };
 
   return (
     <div className="relative h-[50vh] min-h-[400px] w-full overflow-hidden rounded-xl shadow-lg">
@@ -27,11 +40,16 @@ export default function HeroSection() {
         <p className="mt-4 max-w-2xl text-lg md:text-xl text-white/90">
           Discover unique clothing from the best boutiques and shops near you.
         </p>
-        <div className="mt-8 flex w-full max-w-2xl items-center space-x-2 rounded-full bg-white/20 p-2 backdrop-blur-sm">
+        <form
+          onSubmit={handleSearchSubmit}
+          className="mt-8 flex w-full max-w-2xl items-center space-x-2 rounded-full bg-white/20 p-2 backdrop-blur-sm"
+        >
           <Input
             type="search"
-            placeholder="Search by store, place, or product..."
+            placeholder="Enter a Shop ID (e.g., shop-1)..."
             className="flex-grow rounded-full border-0 bg-transparent text-white placeholder:text-white/80 focus-visible:ring-0 focus-visible:ring-offset-0"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <Button
             type="submit"
@@ -40,7 +58,7 @@ export default function HeroSection() {
           >
             <Search className="h-5 w-5" />
           </Button>
-        </div>
+        </form>
         <div className="mt-4 flex flex-wrap justify-center gap-2 text-sm">
           <span className="font-semibold">Recent:</span>
           <Button variant="link" className="p-0 h-auto text-white/80 hover:text-white">Dresses</Button>
