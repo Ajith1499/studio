@@ -48,7 +48,7 @@ export default function ShopsMap({ shops }: ShopsMapProps) {
           ))}
         </div>
         <div className="md:col-span-2 h-[60vh] rounded-xl overflow-hidden relative shadow-lg bg-muted flex items-center justify-center">
-          {apiKey && apiKey !== 'YOUR_API_KEY_HERE' ? (
+          {apiKey ? (
             <iframe
               width="100%"
               height="100%"
@@ -66,7 +66,7 @@ export default function ShopsMap({ shops }: ShopsMapProps) {
               </p>
             </div>
           )}
-          {selectedShop && apiKey && apiKey !== 'YOUR_API_KEY_HERE' && (
+          {selectedShop && apiKey && (
             <div className="absolute bottom-4 left-4 right-4 bg-background p-4 rounded-lg shadow-2xl max-w-sm">
                 <h3 className="font-headline text-xl font-bold">{selectedShop.name}</h3>
                 <p className="text-muted-foreground">{selectedShop.location}</p>
