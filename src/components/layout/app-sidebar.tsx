@@ -10,7 +10,7 @@ import {
   SidebarFooter,
 } from '@/components/ui/sidebar';
 import Logo from '@/components/shared/logo';
-import { Heart, Home, Store, Wallet, Settings, LifeBuoy } from 'lucide-react';
+import { Heart, Home, Store, Wallet, Settings, LifeBuoy, UserCog } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -19,6 +19,7 @@ const menuItems = [
   { href: '/wishlist', icon: Heart, label: 'Wishlist' },
   { href: '/wallet', icon: Wallet, label: 'Wallet' },
   { href: '/shops', icon: Store, label: 'Nearby Shops' },
+  { href: '/shop-owner', icon: UserCog, label: 'Shop Owner' },
 ];
 
 export default function AppSidebar() {
@@ -36,7 +37,7 @@ export default function AppSidebar() {
               <Link href={item.href} passHref>
                 <SidebarMenuButton
                   as="a"
-                  isActive={pathname === item.href}
+                  isActive={pathname.startsWith(item.href) && (item.href !== '/' || pathname === '/')}
                   tooltip={item.label}
                 >
                   <item.icon />

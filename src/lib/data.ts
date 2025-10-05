@@ -4,6 +4,8 @@ const getImage = (id: string): ImagePlaceholder => {
   const image = PlaceHolderImages.find(img => img.id === id);
   if (!image) {
     // Return a default or throw an error
+    const defaultImage = PlaceHolderImages.find(img => img.id === 'default');
+    if (defaultImage) return defaultImage;
     return {
       id: 'default',
       description: 'Default image',
@@ -85,6 +87,18 @@ const wishlistItems: Product[] = [
 export const getProducts = () => products;
 export const getProductById = (id: string) => products.find(p => p.id === id);
 export const getProductsByShop = (shopId: string) => products.filter(p => p.shopId === shopId);
+
+export const addProduct = (product: Omit<Product, 'id' | keyof ImagePlaceholder>) => {
+  const newId = `prod-${products.length + 1}`;
+  const newProduct: Product = {
+    id: newId,
+    ...product,
+    ...getImage('default'), // Use a default image for now
+  };
+  products.unshift(newProduct);
+  return newProduct;
+};
+
 
 export const getShops = () => shops;
 export const getShopById = (id: string) => shops.find(s => s.id === id);
