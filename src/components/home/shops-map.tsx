@@ -14,10 +14,6 @@ export default function ShopsMap({ shops }: ShopsMapProps) {
   
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   const getMapUrl = () => {
-    if (!apiKey) {
-      return "about:blank";
-    }
-
     if (selectedShop) {
       return `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${selectedShop.latitude},${selectedShop.longitude}`;
     }
@@ -36,10 +32,7 @@ export default function ShopsMap({ shops }: ShopsMapProps) {
 
   return (
     <section>
-      <h2 className="font-headline text-3xl font-bold tracking-tight">
-        Explore Shops on the Map
-      </h2>
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="md:col-span-1 h-96 md:h-full overflow-y-auto space-y-4 pr-2">
           {shops.map((shop) => (
             <div key={shop.id} onClick={() => setSelectedShop(shop)} className="cursor-pointer">
@@ -48,7 +41,6 @@ export default function ShopsMap({ shops }: ShopsMapProps) {
           ))}
         </div>
         <div className="md:col-span-2 h-[60vh] rounded-xl overflow-hidden relative shadow-lg bg-muted flex items-center justify-center">
-          {apiKey ? (
             <iframe
               width="100%"
               height="100%"
@@ -57,16 +49,7 @@ export default function ShopsMap({ shops }: ShopsMapProps) {
               allowFullScreen
               src={getMapUrl()}
             ></iframe>
-          ) : (
-             <div className="text-center text-muted-foreground p-8">
-              <p className="font-semibold">Google Maps API Key is missing.</p>
-              <p className="text-sm mt-2">
-                To enable the map, please add your key to the{' '}
-                <code>.env.local</code> file and restart the server.
-              </p>
-            </div>
-          )}
-          {selectedShop && apiKey && (
+          {selectedShop && (
             <div className="absolute bottom-4 left-4 right-4 bg-background p-4 rounded-lg shadow-2xl max-w-sm">
                 <h3 className="font-headline text-xl font-bold">{selectedShop.name}</h3>
                 <p className="text-muted-foreground">{selectedShop.location}</p>
