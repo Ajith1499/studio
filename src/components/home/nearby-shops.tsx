@@ -21,23 +21,7 @@ export default function NearbyShops({ shops }: NearbyShopsProps) {
       </h2>
       <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {shops.map((shop) => (
-          <Sheet key={shop.id}>
-            <SheetTrigger asChild>
-              <ShopCard shop={shop} />
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>{shop.name}</SheetTitle>
-              </SheetHeader>
-              <div className="py-4">
-                {/* Full shop details could be rendered here */}
-                <p>{shop.location}</p>
-                <Link href={`/shops/${shop.id}`} className="text-primary hover:underline mt-4 inline-block">
-                  Visit Shop
-                </Link>
-              </div>
-            </SheetContent>
-          </Sheet>
+            <ShopCard shop={shop} key={shop.id}/>
         ))}
       </div>
     </section>
