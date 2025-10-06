@@ -5,27 +5,69 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { getShops } from '@/lib/data';
+import { getShops, type Shop } from '@/lib/data';
+import Link from 'next/link';
 
 export default function HeroSection() {
   const heroImage = PlaceHolderImages.find((img) => img.id === 'hero-1');
   const [searchQuery, setSearchQuery] = useState('');
+  const [suggestions, setSuggestions] = useState<Shop[]>([]);
+  const [isSuggestionsVisible, setIsSuggestionsVisible] = useState(false);
   const router = useRouter();
+  const searchContainerRef = useRef<HTMLFormElement>(null);
+
+  const allShops = getShops();
+
+  useEffect(() => {
+    if (searchQuery.trim()) {
+      const filteredShops = allShops
+        .filter((shop) =>
+          shop.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .slice(0, 5); // Limit to 5 suggestions
+      setSuggestions(filteredShops);
+      setIsSuggestionsVisible(filteredShops.length > 0);
+    } else {
+      setSuggestions([]);
+      setIsSuggestionsVisible(false);
+    }
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        setIsSuggestionsVisible(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const query = searchQuery.trim().toLowerCase();
     if (query) {
-      const shops = getShops();
-      const shop = shops.find(s => s.name.toLowerCase() === query);
+      const shop = allShops.find((s) => s.name.toLowerCase() === query);
       if (shop) {
         router.push(`/shops/${shop.id}`);
       } else {
-        // Optional: Add a toast notification here to inform the user that the shop was not found.
+        // Optional: Add a toast notification here
         alert(`Shop "${searchQuery}" not found.`);
       }
+      setIsSuggestionsVisible(false);
+    }
+  };
+
+  const handleSuggestionClick = (shopName: string) => {
+    setSearchQuery(shopName);
+    setIsSuggestionsVisible(false);
+    const shop = allShops.find((s) => s.name.toLowerCase() === shopName.toLowerCase());
+    if(shop) {
+        router.push(`/shops/${shop.id}`);
     }
   };
 
@@ -50,23 +92,42 @@ export default function HeroSection() {
           Discover unique clothing from the best boutiques and shops near you.
         </p>
         <form
+          ref={searchContainerRef}
           onSubmit={handleSearchSubmit}
-          className="mt-8 flex w-full max-w-2xl items-center space-x-2 rounded-full bg-white/20 p-2 backdrop-blur-sm"
+          className="relative mt-8 w-full max-w-2xl"
         >
-          <Input
-            type="search"
-            placeholder="Enter a shop name (e.g., Vogue Venture)..."
-            className="flex-grow rounded-full border-0 bg-transparent text-white placeholder:text-white/80 focus-visible:ring-0 focus-visible:ring-offset-0"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <Button
-            type="submit"
-            size="icon"
-            className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
-          >
-            <Search className="h-5 w-5" />
-          </Button>
+          <div className="flex w-full items-center space-x-2 rounded-full bg-white/20 p-2 backdrop-blur-sm">
+            <Input
+              type="search"
+              placeholder="Enter a shop name (e.g., Vogue Venture)..."
+              className="flex-grow rounded-full border-0 bg-transparent text-white placeholder:text-white/80 focus-visible:ring-0 focus-visible:ring-offset-0"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => setIsSuggestionsVisible(searchQuery.length > 0 && suggestions.length > 0)}
+            />
+            <Button
+              type="submit"
+              size="icon"
+              className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              <Search className="h-5 w-5" />
+            </Button>
+          </div>
+          {isSuggestionsVisible && suggestions.length > 0 && (
+            <div className="absolute mt-2 w-full rounded-md bg-background border border-border shadow-lg z-10 text-left">
+              <ul className="py-1">
+                {suggestions.map((shop) => (
+                  <li
+                    key={shop.id}
+                    className="px-4 py-2 cursor-pointer text-foreground hover:bg-accent"
+                    onClick={() => handleSuggestionClick(shop.name)}
+                  >
+                    {shop.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </form>
         <div className="mt-4 flex flex-wrap justify-center gap-2 text-sm">
           <span className="font-semibold">Recent:</span>
