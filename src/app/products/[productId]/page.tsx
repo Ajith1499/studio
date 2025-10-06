@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getProductById, getShopById } from '@/lib/data';
 import { Button } from '@/components/ui/button';
-import { Heart, MapPin, ShoppingCart, Store } from 'lucide-react';
+import { Heart, MapPin, ShoppingCart, Store, CreditCard } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -43,13 +43,18 @@ export default function ProductDetailsPage({
           {product.description}. A must-have item that combines style and comfort. Perfect for any occasion.
         </p>
 
-        <div className="flex gap-4">
-          <Button size="lg" className="flex-1">
-            <ShoppingCart className="mr-2" /> Add to Cart
-          </Button>
-          <Button size="lg" variant="outline">
-            <Heart className="mr-2" /> Add to Wishlist
-          </Button>
+        <div className="flex flex-col gap-4">
+            <Button size="lg" className="w-full">
+                <CreditCard className="mr-2" /> Buy Now
+            </Button>
+            <div className="flex gap-4">
+                <Button size="lg" variant="outline" className="flex-1">
+                    <ShoppingCart className="mr-2" /> Add to Cart
+                </Button>
+                <Button size="lg" variant="outline" className="flex-1">
+                    <Heart className="mr-2" /> Add to Wishlist
+                </Button>
+            </div>
         </div>
         
         <Separator />
