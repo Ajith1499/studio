@@ -28,12 +28,10 @@ export default function HeroSection() {
         )
         .slice(0, 5); // Limit to 5 suggestions
       setSuggestions(filteredShops);
-      setIsSuggestionsVisible(filteredShops.length > 0);
     } else {
       setSuggestions([]);
-      setIsSuggestionsVisible(false);
     }
-  }, [searchQuery]);
+  }, [searchQuery, allShops]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -70,6 +68,20 @@ export default function HeroSection() {
         router.push(`/shops/${shop.id}`);
     }
   };
+  
+  const handleInputFocus = () => {
+    if (searchQuery.trim() && suggestions.length > 0) {
+      setIsSuggestionsVisible(true);
+    }
+  }
+  
+  useEffect(() => {
+    if (searchQuery.trim() && suggestions.length > 0) {
+      setIsSuggestionsVisible(true);
+    } else {
+      setIsSuggestionsVisible(false);
+    }
+  }, [searchQuery, suggestions]);
 
   return (
     <div className="relative h-[50vh] min-h-[400px] w-full overflow-hidden rounded-xl shadow-lg">
@@ -103,7 +115,7 @@ export default function HeroSection() {
               className="flex-grow rounded-full border-0 bg-transparent text-white placeholder:text-white/80 focus-visible:ring-0 focus-visible:ring-offset-0"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onFocus={() => setIsSuggestionsVisible(searchQuery.length > 0 && suggestions.length > 0)}
+              onFocus={handleInputFocus}
             />
             <Button
               type="submit"
