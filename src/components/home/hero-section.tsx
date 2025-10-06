@@ -8,15 +8,14 @@ import { Search } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { getShops, type Shop } from '@/lib/data';
-import Link from 'next/link';
 
 export default function HeroSection() {
   const heroImage = PlaceHolderImages.find((img) => img.id === 'hero-1');
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState<Shop[]>([]);
-  const [isSuggestionsVisible, setIsSuggestionsVisible] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const router = useRouter();
-  const searchContainerRef = useRef<HTMLFormElement>(null);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
 
   const allShops = getShops();
 
@@ -36,7 +35,7 @@ export default function HeroSection() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
-        setIsSuggestionsVisible(false);
+        setIsInputFocused(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -53,35 +52,18 @@ export default function HeroSection() {
       if (shop) {
         router.push(`/shops/${shop.id}`);
       } else {
-        // Optional: Add a toast notification here
         alert(`Shop "${searchQuery}" not found.`);
       }
-      setIsSuggestionsVisible(false);
+      setIsInputFocused(false);
     }
   };
 
-  const handleSuggestionClick = (shopName: string) => {
-    setSearchQuery(shopName);
-    setIsSuggestionsVisible(false);
-    const shop = allShops.find((s) => s.name.toLowerCase() === shopName.toLowerCase());
-    if(shop) {
-        router.push(`/shops/${shop.id}`);
-    }
+  const handleSuggestionClick = (shop: Shop) => {
+    setSearchQuery(shop.name);
+    setSuggestions([]);
+    setIsInputFocused(false);
+    router.push(`/shops/${shop.id}`);
   };
-  
-  const handleInputFocus = () => {
-    if (searchQuery.trim() && suggestions.length > 0) {
-      setIsSuggestionsVisible(true);
-    }
-  }
-  
-  useEffect(() => {
-    if (searchQuery.trim() && suggestions.length > 0) {
-      setIsSuggestionsVisible(true);
-    } else {
-      setIsSuggestionsVisible(false);
-    }
-  }, [searchQuery, suggestions]);
 
   return (
     <div className="relative h-[50vh] min-h-[400px] w-full overflow-hidden rounded-xl shadow-lg">
@@ -103,19 +85,18 @@ export default function HeroSection() {
         <p className="mt-4 max-w-2xl text-lg md:text-xl text-white/90">
           Discover unique clothing from the best boutiques and shops near you.
         </p>
-        <form
-          ref={searchContainerRef}
-          onSubmit={handleSearchSubmit}
-          className="relative mt-8 w-full max-w-2xl"
-        >
-          <div className="flex w-full items-center space-x-2 rounded-full bg-white/20 p-2 backdrop-blur-sm">
+        <div ref={searchContainerRef} className="relative mt-8 w-full max-w-2xl">
+          <form
+            onSubmit={handleSearchSubmit}
+            className="flex w-full items-center space-x-2 rounded-full bg-white/20 p-2 backdrop-blur-sm"
+          >
             <Input
               type="search"
               placeholder="Enter a shop name (e.g., Vogue Venture)..."
               className="flex-grow rounded-full border-0 bg-transparent text-white placeholder:text-white/80 focus-visible:ring-0 focus-visible:ring-offset-0"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onFocus={handleInputFocus}
+              onFocus={() => setIsInputFocused(true)}
             />
             <Button
               type="submit"
@@ -124,15 +105,15 @@ export default function HeroSection() {
             >
               <Search className="h-5 w-5" />
             </Button>
-          </div>
-          {isSuggestionsVisible && suggestions.length > 0 && (
+          </form>
+          {isInputFocused && suggestions.length > 0 && (
             <div className="absolute mt-2 w-full rounded-md bg-background border border-border shadow-lg z-10 text-left">
               <ul className="py-1">
                 {suggestions.map((shop) => (
                   <li
                     key={shop.id}
                     className="px-4 py-2 cursor-pointer text-foreground hover:bg-accent"
-                    onClick={() => handleSuggestionClick(shop.name)}
+                    onClick={() => handleSuggestionClick(shop)}
                   >
                     {shop.name}
                   </li>
@@ -140,7 +121,7 @@ export default function HeroSection() {
               </ul>
             </div>
           )}
-        </form>
+        </div>
         <div className="mt-4 flex flex-wrap justify-center gap-2 text-sm">
           <span className="font-semibold">Recent:</span>
           <Button variant="link" className="p-0 h-auto text-white/80 hover:text-white">Dresses</Button>
