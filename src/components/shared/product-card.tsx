@@ -23,7 +23,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
   return (
     <Card className={cn('overflow-hidden transition-all hover:shadow-xl group', className)}>
       <CardContent className="p-0">
-        <Link href={`/shops/${product.shopId}?product=${product.id}`}>
+        <Link href={`/products/${product.id}`}>
         <div className="relative aspect-[3/4] w-full overflow-hidden">
           <Image
             src={product.imageUrl}
@@ -51,7 +51,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
       </CardContent>
       <CardFooter className="flex-col items-start p-4">
         <CardTitle className="font-headline text-lg leading-tight">
-          <Link href={`/shops/${product.shopId}?product=${product.id}`} className="hover:text-primary transition-colors">
+          <Link href={`/products/${product.id}`} className="hover:text-primary transition-colors">
             {product.name}
           </Link>
         </CardTitle>
