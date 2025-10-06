@@ -1,3 +1,6 @@
+
+'use client';
+
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getProductById, getShopById } from '@/lib/data';
@@ -6,12 +9,16 @@ import { Heart, MapPin, ShoppingCart, Store, CreditCard } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { useState } from 'react';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 
 export default function ProductDetailsPage({
   params,
 }: {
   params: { productId: string };
 }) {
+  const [selectedSize, setSelectedSize] = useState('M');
   const product = getProductById(params.productId);
 
   if (!product) {
@@ -19,6 +26,7 @@ export default function ProductDetailsPage({
   }
 
   const shop = getShopById(product.shopId);
+  const sizes = ['S', 'M', 'L', 'XL'];
 
   return (
     <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
@@ -42,6 +50,27 @@ export default function ProductDetailsPage({
         <p className="text-muted-foreground leading-relaxed">
           {product.description}. A must-have item that combines style and comfort. Perfect for any occasion.
         </p>
+        
+        <div>
+          <Label className="text-base font-medium">Size</Label>
+          <RadioGroup 
+            defaultValue={selectedSize} 
+            onValueChange={setSelectedSize}
+            className="flex items-center gap-2 mt-2"
+          >
+            {sizes.map((size) => (
+              <Label
+                key={size}
+                htmlFor={`size-${size}`}
+                className={`flex items-center justify-center rounded-md border-2 w-12 h-12 text-base font-semibold cursor-pointer transition-colors
+                  ${selectedSize === size ? 'border-primary bg-primary/10 text-primary' : 'border-input hover:bg-accent'}`}
+              >
+                <RadioGroupItem value={size} id={`size-${size}`} className="sr-only" />
+                {size}
+              </Label>
+            ))}
+          </RadioGroup>
+        </div>
 
         <div className="flex flex-col gap-4">
             <Button size="lg" className="w-full">
