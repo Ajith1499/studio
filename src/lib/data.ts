@@ -110,6 +110,16 @@ export const addProduct = (product: Omit<Product, 'id' | keyof ImagePlaceholder 
 export const getShops = () => shops;
 export const getShopById = (id: string) => shops.find(s => s.id === id);
 
+export const getTrendingShops = (limit: number = 4) => {
+    const shopSales = shops.map(shop => {
+      const shopProducts = products.filter(p => p.shopId === shop.id);
+      const totalSales = shopProducts.reduce((acc, p) => acc + p.purchaseCount, 0);
+      return { ...shop, totalSales };
+    });
+  
+    return shopSales.sort((a, b) => b.totalSales - a.totalSales).slice(0, limit);
+};
+
 export const getWalletTransactions = () => walletTransactions;
 export const getWalletBalance = () => walletTransactions.reduce((acc, t) => acc + (t.type === 'credit' ? t.amount : -t.amount), 0);
 
