@@ -32,12 +32,15 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import React from 'react';
+import { Upload } from 'lucide-react';
 
 
 const productSchema = z.object({
   name: z.string().min(1, 'Product name is required'),
   price: z.coerce.number().positive('Price must be a positive number'),
   category: z.enum(['Men', 'Women', 'Kids']),
+  productType: z.enum(['Shirt', 'Pants', 'Jacket', 'Dress', 'Shoes', 'Accessory']),
+  image: z.any().optional(), // In a real app, this would have more robust validation
 });
 
 type ProductFormValues = z.infer<typeof productSchema>;
@@ -58,13 +61,23 @@ export default function ProductForm({ shopId, onProductAdded, open, onOpenChange
       name: '',
       price: 0,
       category: 'Women',
+      productType: 'Shirt',
     },
   });
 
   const onSubmit = (values: ProductFormValues) => {
     try {
+      // In a real app, you'd handle file upload here.
+      // For now, we'll just log the image info if present.
+      if (values.image && values.image.length > 0) {
+        console.log('Image to upload:', values.image[0].name);
+      }
+
       const newProduct = addProduct({
-        ...values,
+        name: values.name,
+        price: values.price,
+        category: values.category,
+        productType: values.productType,
         shopId: shopId,
         tags: [],
       });
@@ -88,7 +101,7 @@ export default function ProductForm({ shopId, onProductAdded, open, onOpenChange
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Add New Product</DialogTitle>
           <DialogDescription>
@@ -123,28 +136,79 @@ export default function ProductForm({ shopId, onProductAdded, open, onOpenChange
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="category"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Category</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Audience</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Women">Women</SelectItem>
+                        <SelectItem value="Men">Men</SelectItem>
+                        <SelectItem value="Kids">Kids</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="productType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Product Type</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Shirt">Shirt</SelectItem>
+                        <SelectItem value="Pants">Pants</SelectItem>
+                        <SelectItem value="Jacket">Jacket</SelectItem>
+                        <SelectItem value="Dress">Dress</SelectItem>
+                        <SelectItem value="Shoes">Shoes</SelectItem>
+                        <SelectItem value="Accessory">Accessory</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+             <FormField
+                control={form.control}
+                name="image"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Product Image</FormLabel>
                     <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a category" />
-                      </SelectTrigger>
+                        <div className="relative">
+                            <Input
+                                type="file"
+                                className="w-full pr-16"
+                                accept="image/*"
+                                onChange={(e) => field.onChange(e.target.files)}
+                            />
+                            <Button type="button" size="sm" className="absolute right-1 top-1/2 -translate-y-1/2" disabled>
+                                <Upload className="mr-2 h-4 w-4" />
+                                Upload
+                            </Button>
+                        </div>
                     </FormControl>
-                    <SelectContent>
-                      <SelectItem value="Women">Women</SelectItem>
-                      <SelectItem value="Men">Men</SelectItem>
-                      <SelectItem value="Kids">Kids</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             <DialogFooter>
               <Button type="submit">Add Product</Button>
             </DialogFooter>
