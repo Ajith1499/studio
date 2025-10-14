@@ -2,8 +2,8 @@
 'use client';
 
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
-import { getProductById, getShopById } from '@/lib/data';
+import { notFound, useRouter } from 'next/navigation';
+import { getProductById, getShopById, addToWishlist } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { Heart, MapPin, ShoppingCart, Store, CreditCard, Star, Users } from 'lucide-react';
 import Link from 'next/link';
@@ -12,6 +12,7 @@ import { Separator } from '@/components/ui/separator';
 import { useState } from 'react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
 
 const StarRating = ({ rating }: { rating: number }) => {
   const fullStars = Math.floor(rating);
@@ -37,6 +38,9 @@ export default function ProductDetailsPage({
   params: { productId: string };
 }) {
   const [selectedSize, setSelectedSize] = useState('M');
+  const router = useRouter();
+  const { toast } = useToast();
+
   const product = getProductById(params.productId);
 
   if (!product) {
@@ -45,6 +49,15 @@ export default function ProductDetailsPage({
 
   const shop = getShopById(product.shopId);
   const sizes = ['S', 'M', 'L', 'XL'];
+
+  const handleAddToWishlist = () => {
+    addToWishlist(product.id);
+    toast({
+      title: "Added to Wishlist!",
+      description: `${product.name} has been added to your wishlist.`,
+    });
+    router.push('/wishlist');
+  };
 
   return (
     <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
@@ -111,7 +124,7 @@ export default function ProductDetailsPage({
                 <Button size="lg" variant="outline" className="flex-1">
                     <ShoppingCart className="mr-2" /> Add to Cart
                 </Button>
-                <Button size="lg" variant="outline" className="flex-1">
+                <Button size="lg" variant="outline" className="flex-1" onClick={handleAddToWishlist}>
                     <Heart className="mr-2" /> Add to Wishlist
                 </Button>
             </div>

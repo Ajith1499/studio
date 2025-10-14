@@ -113,3 +113,10 @@ export const getWalletTransactions = () => walletTransactions;
 export const getWalletBalance = () => walletTransactions.reduce((acc, t) => acc + (t.type === 'credit' ? t.amount : -t.amount), 0);
 
 export const getWishlistItems = () => wishlistItems;
+
+export const addToWishlist = (productId: string) => {
+    const product = getProductById(productId);
+    if (product && !wishlistItems.find(item => item.id === productId)) {
+      wishlistItems.unshift(product);
+    }
+  };
