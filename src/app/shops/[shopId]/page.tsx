@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { getShopById, getProductsByShop } from '@/lib/data';
+import { getShopById, getProductsByShop, getShopStats } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { MapPin, Phone, MessageSquare } from 'lucide-react';
+import { MapPin, Phone, Users, ShoppingBag } from 'lucide-react';
 import ProductCard from '@/components/shared/product-card';
 import ChatDialog from '@/components/chat-dialog';
 import Link from 'next/link';
+import { Separator } from '@/components/ui/separator';
 
 export default function ShopDetailsPage({
   params,
@@ -20,6 +21,8 @@ export default function ShopDetailsPage({
   }
 
   const allProducts = getProductsByShop(shop.id);
+  const { totalSales, totalRatings } = getShopStats(shop.id);
+
   const menProducts = allProducts.filter((p) => p.category === 'Men');
   const womenProducts = allProducts.filter((p) => p.category === 'Women');
   const kidsProducts = allProducts.filter((p) => p.category === 'Kids');
@@ -55,6 +58,17 @@ export default function ShopDetailsPage({
             <MapPin className="h-5 w-5" />
             <span>{shop.location}</span>
           </Link>
+          <div className="mt-4 flex items-center gap-6 text-sm text-white/90">
+            <div className="flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              <span>{totalRatings.toLocaleString()} Ratings</span>
+            </div>
+            <Separator orientation="vertical" className="h-4 bg-white/50" />
+            <div className="flex items-center gap-2">
+              <ShoppingBag className="h-4 w-4" />
+              <span>{totalSales.toLocaleString()} Products Sold</span>
+            </div>
+          </div>
         </div>
       </header>
 

@@ -10,7 +10,7 @@ const getImage = (id: string): ImagePlaceholder => {
       id: 'default',
       description: 'Default image',
       imageUrl: 'https://picsum.photos/seed/default/600/800',
-      imageHint: 'placeholder',
+      imageHint: 'product placeholder',
     };
   }
   return image;
@@ -118,6 +118,13 @@ export const getTrendingShops = (limit: number = 4) => {
     });
   
     return shopSales.sort((a, b) => b.totalSales - a.totalSales).slice(0, limit);
+};
+
+export const getShopStats = (shopId: string) => {
+    const shopProducts = getProductsByShop(shopId);
+    const totalSales = shopProducts.reduce((acc, p) => acc + p.purchaseCount, 0);
+    const totalRatings = shopProducts.reduce((acc, p) => acc + p.ratingCount, 0);
+    return { totalSales, totalRatings };
 };
 
 export const getWalletTransactions = () => walletTransactions;
