@@ -38,7 +38,6 @@ export default function ProductDetailsPage({
   params: { productId: string };
 }) {
   const [selectedSize, setSelectedSize] = useState('M');
-  const router = useRouter();
   const { toast } = useToast();
 
   const product = getProductById(params.productId);
@@ -56,7 +55,6 @@ export default function ProductDetailsPage({
       title: "Added to Wishlist!",
       description: `${product.name} has been added to your wishlist.`,
     });
-    router.push('/wishlist');
   };
 
   return (
