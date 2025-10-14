@@ -5,13 +5,31 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getProductById, getShopById } from '@/lib/data';
 import { Button } from '@/components/ui/button';
-import { Heart, MapPin, ShoppingCart, Store, CreditCard } from 'lucide-react';
+import { Heart, MapPin, ShoppingCart, Store, CreditCard, Star, Users } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { useState } from 'react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
+
+const StarRating = ({ rating }: { rating: number }) => {
+  const fullStars = Math.floor(rating);
+  const halfStar = rating % 1 !== 0;
+  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+  return (
+    <div className="flex items-center">
+      {[...Array(fullStars)].map((_, i) => (
+        <Star key={`full-${i}`} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+      ))}
+      {halfStar && <Star key="half" className="h-5 w-5 fill-yellow-400 text-yellow-400" style={{ clipPath: 'inset(0 50% 0 0)' }} />}
+      {[...Array(emptyStars)].map((_, i) => (
+        <Star key={`empty-${i}`} className="h-5 w-5 text-gray-300" />
+      ))}
+    </div>
+  );
+};
 
 export default function ProductDetailsPage({
   params,
@@ -45,6 +63,19 @@ export default function ProductDetailsPage({
         <div>
           <h1 className="font-headline text-4xl font-bold">{product.name}</h1>
           <p className="mt-2 text-3xl font-semibold">${product.price.toFixed(2)}</p>
+          
+          <div className="mt-4 flex items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-1">
+              <StarRating rating={product.rating} />
+              <span className="font-semibold text-foreground ml-1">{product.rating.toFixed(1)}</span>
+              <span>({product.ratingCount} ratings)</span>
+            </div>
+            <Separator orientation="vertical" className="h-4" />
+            <div className="flex items-center gap-1">
+              <Users className="h-4 w-4" />
+              <span>{product.purchaseCount} bought</span>
+            </div>
+          </div>
         </div>
 
         <p className="text-muted-foreground leading-relaxed">
